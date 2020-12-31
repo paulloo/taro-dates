@@ -8,6 +8,19 @@
     "typescript": true,
     "css": "sass"
   },
+  "main": "dist/index.js",
+  "main:h5": "dist/h5/index.js",
+  "types": "./types/index.d.ts",
+  "files": [
+    "dist",
+    "types",
+    "src/**/interface.ts",
+    "src/**/*.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:paulloo/taro-dates.git"
+  },
   "scripts": {
     "build:weapp": "taro build --type weapp",
     "build:swan": "taro build --type swan",
