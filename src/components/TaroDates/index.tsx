@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Text, ScrollView } from '@tarojs/components';
 import PropTypes, {InferProps} from 'prop-types'
-import { TaroDateProps, TaroDateState } from '../../../types/taro-dates'
+import { TaroDateProps, TaroDateState } from 'types/taro-dates'
 import classnames from 'classnames';
 import dayjs, {Dayjs} from 'dayjs';
 import 'dayjs/locale/zh-cn'
