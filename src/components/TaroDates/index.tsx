@@ -1064,6 +1064,7 @@ TaroDates.defaultProps = {
   isDayBlocked:  () => false,
   isOutsideRange:  () => false,
   getMinNightsForHoverDate: () => 0,
+  isReserveOfDay: () => false,
   // startDateOffset: () => {},
   // endDateOffset: () => {},
   // onBlur: () => {},
