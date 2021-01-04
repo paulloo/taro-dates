@@ -21,7 +21,7 @@ import getSelectedDateOffset from './utils/getSelectedDateOffset';
 import getPooledMoment from './utils/getPooledMoment';
 import getNumberOfCalendarMonthWeeks from './utils/getNumberOfCalendarMonthWeeks';
 import { delayQuerySelector } from '../../utils';
-// import AtComponent from '../../common/component';
+import AtComponent from '../../common/component';
 import Month from './Month';
 
 import {
@@ -67,7 +67,7 @@ const getChooseAvailableDatePhrase = (phrases, focusedInput) => {
   }
   return phrases.chooseAvailableDate;
 };
-export default class TaroDates extends Component<TaroDateProps, TaroDateState> {
+export default class TaroDates extends AtComponent<TaroDateProps, TaroDateState> {
   public static defaultProps: TaroDateProps
   public static propTypes: InferProps<TaroDateProps>
 
