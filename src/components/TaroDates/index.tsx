@@ -1,4 +1,4 @@
-import Taro, { Component } from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 import { View, Text, ScrollView } from '@tarojs/components';
 import PropTypes, {InferProps} from 'prop-types'
 import { TaroDateProps, TaroDateState } from 'types/taro-dates'
