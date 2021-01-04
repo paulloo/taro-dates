@@ -1,0 +1,326 @@
+$color-brand: #00c777;
+.taro-dates__wrap {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 56px;
+  }
+  .cal-month__scroll {
+      position: absolute;
+      top: 56px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+  }
+  .cal-week-monthes {
+  }
+  .taro-dates__cycle {
+    .cal-week-monthes {
+      padding-bottom: 90px;
+    }
+  }
+  
+  .cal-week-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    height: 56px;
+    line-height: 56px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    background-color: #556a72;
+    color: #fff;
+    z-index: 110;
+  }
+  
+  .cal-week-item {
+    width: 14.2857%;
+    margin-left: -1px;
+    text-align: center;
+    font-size: 24px;
+  
+    &__active {
+      color: $color-brand;
+    }
+  }
+  
+  .cal-month-title {
+    padding: 20px 0;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  .cal-cycle-notice {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 90px;
+    line-height: 90px;
+    z-index: 109;
+    text-align: center;
+    font-size: 28px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  // day
+  .cal-day {
+    width: 14.2857%;
+    height: 88px;
+    line-height: 88px;
+    float: left;
+    font-size: 28px;
+    color: rgb(72, 72, 72);
+    position: relative;
+    text-align: center;
+    border-radius: 7px;
+    &__txt {
+      height: 44px;
+      &-wrp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        
+      }
+      &-price, &-holiday {
+        font-size: 20px;
+        color: #ccc;
+      }
+    }
+  
+    &__cursor-default {
+      cursor: default;
+    }
+  
+    &__default {
+      // border: 1px solid #e4e7e7;
+      color: #484848;
+      background: #fff;
+  
+      &:hover {
+        background: #e4e7e7;
+        //   border: 1px solid #e4e7e7;
+        color: 'inherit';
+      }
+    }
+  
+    &__hovered_offset {
+      background: #f4f5f5;
+      // border: 1px double #e4e7e7;
+      color: 'inherit';
+    }
+  
+    &__outside {
+      border: 0;
+      background: #fff;
+      color: #999;
+  
+      &:hover {
+        border: 0;
+      }
+    }
+  
+    &__blocked_minimum_nights {
+      background: #fff;
+      // border: 1px solid #eceeee;
+      color: #cacccd;
+  
+      &:hover {
+        background: #fff;
+        color: #cacccd;
+      }
+  
+      &:active {
+        background: #fff;
+        color: #cacccd;
+      }
+    }
+  
+    &__highlighted_calendar {
+      background: #82E0AA;
+      color: #186A3B;
+  
+      &:hover {
+        background: #58D68D;
+        color: #186A3B;
+      }
+  
+      &:active {
+        background: #58D68D;
+        color: #186A3B;
+      }
+    }
+  
+    &__saturdayOfweek {
+      color: $color-brand;
+    }
+  
+    &__lastday_theme {
+      color: $color-brand;
+    }
+  
+    &__selected_span {
+      background: #e9f8f6;
+      border-radius: 0;
+      // border: 1px double #33dacd;
+      // color: #fff;
+  
+      &:hover {
+        background: #33dacd;
+        //   border: 1px double #33dacd;
+        color: #fff;
+      }
+  
+      &:active {
+        background: #33dacd;
+        //   border: 1px double #33dacd;
+        color: #fff;
+      }
+    }
+  
+    &__selected {
+      background: $color-brand;
+      // border: 1px double rgb(0, 166, 153);
+      color: #fff;
+  
+      &:hover {
+        background: $color-brand;
+        // border: 1px double rgb(0, 166, 153);
+        color: #fff;
+      }
+  
+      &:active {
+        background: $color-brand;
+        // border: 1px double rgb(0, 166, 153);
+        color: #fff;
+      }
+      
+      .cal-day__txt-holiday, .cal-day__txt-price {
+        color: #fff;
+      }
+    }
+  
+    &__hovered_span {
+      background: #e9f8f6;
+      // border: 1px double #80e8e0;
+      color: #007a87;
+  
+      &:hover {
+        background: #e9f8f6;
+        // border: 1px double #80e8e0;
+        color: #007a87;
+      }
+  
+      &:active {
+        background: #80e8e0;
+        // border: 1px double #80e8e0;
+        color: #007a87;
+      }
+    }
+  
+    &__blocked_calendar {
+      background: #cacccd;
+      // border: 1px solid #cacccd;
+      color: #82888a;
+      border-radius: 0;
+      &:hover {
+        background: #cacccd;
+        // border: 1px solid #cacccd;
+        color: #82888a;
+      }
+  
+      &:active {
+        background: #cacccd;
+        // border: 1px solid #cacccd;
+        color: #82888a;
+      }
+    }
+  
+    &__blocked-out_of_range {
+      background: #fff;
+      // border: 1px solid #eceeee;
+      color: #b2b2b2;
+  
+      &:hover {
+        background: #fff;
+        // border: 1px solid #eceeee;
+        color: #cacccd;
+      }
+  
+      &:active {
+        background: #fff;
+        // border: 1px solid #eceeee;
+        color: #cacccd;
+      }
+    }
+  
+    &__hovered_start_first_possible_end {
+      background: #eceeee;
+      //   border: 1px double #eceeee;
+    }
+  
+    &__hovered_start_blocked_min_nights {
+      background: #eceeee;
+      // border: 1px double #e4e7e7;
+    }
+  
+    &__reserve, &__holiday {
+      line-height: normal;
+      // line-height: 44px;
+    }
+  
+    &__holiday {
+      
+    }
+  
+    // &__selected_start {}
+  
+    // &__selected_end {}
+  
+    // &__today {}
+  
+    // &__firstDayOfWeek {}
+  
+    // &__lastDayOfWeek {}
+  }
+  
+  // week
+  .cal-week {
+    margin-bottom: 10px;
+    // width: calc(100% + 7px);
+    overflow: hidden;
+  }
+  
+  // month
+  .cal-month {
+    position: relative;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 16px;
+    margin-bottom: -16px;
+    background-color: #fff;
+    &__round {
+      
+      .cal-day__selected_start {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        line-height: normal;
+      }
+      .cal-day__selected_end {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        line-height: normal;
+      }
+    }
+  }
+  
+  
+  
+  

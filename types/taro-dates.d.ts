@@ -59,6 +59,7 @@ export interface TaroDateState {
   hoverDate: any;
   visibleDays: any;
   currentMonth: any;
+  intoView: string;
   phrasesState: any;
   dateOffset: any;
 }

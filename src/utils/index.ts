@@ -1,3 +1,4 @@
+import Taro  from '@tarojs/taro'
 import { execObject, SelectorQuery } from '@tarojs/taro/types/index'
 const ENV = Taro.getEnv()
 

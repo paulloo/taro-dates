@@ -1,0 +1,10 @@
+@import '../../styles/taro-dates.scss';
+
+.index-wrp {
+    position: fixed;
+    bottom: 200px;
+    left: 0;
+    right: 0;
+    height: 1000px;
+    overflow: auto;
+}

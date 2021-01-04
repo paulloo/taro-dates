@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Text } from '@tarojs/components';
+import { View, Text, ScrollView } from '@tarojs/components';
 import PropTypes, {InferProps} from 'prop-types'
 import { TaroDateProps, TaroDateState } from '../../../types/taro-dates'
 import classnames from 'classnames';
@@ -74,7 +74,6 @@ export default class TaroDates extends Component<TaroDateProps, TaroDateState> {
   private today: any;
   private modifiers: any;
 
-  private isTouchDevice: any;
   private calendarMonthWeeks: any;
   constructor(props: TaroDateProps) {
     super(props);
@@ -122,9 +121,8 @@ export default class TaroDates extends Component<TaroDateProps, TaroDateState> {
         ...props.phrases,
         chooseAvailableDate,
       },
+      intoView: ''
     };
-
-    this.setCalendarMonthWeeks(currentMonth);
 
     this.onDayClick = this.onDayClick.bind(this);
   }
@@ -402,15 +400,18 @@ export default class TaroDates extends Component<TaroDateProps, TaroDateState> {
     const that = this;
     const { startDate, endDate } = this.props;
     const { currentMonth } = this.state;
-    // this.isTouchDevice = isTouchDevice();
     this.isTouchDevice = true;
 
     this.setCalendarMonthWeeks(currentMonth);
     this.setState({
       endDateState: endDate,
     })
+
+    
     // 滚动到当前月份
-    this.scrollToSelectMonth(startDate)
+    this.delay(200).then(() => {
+      that.scrollToSelectMonth(startDate)
+    })
 
     // 这里会影响页面滚动
     // Taro.onWindowResize(() => {
@@ -434,23 +435,29 @@ export default class TaroDates extends Component<TaroDateProps, TaroDateState> {
 
   scrollToSelectMonth(selectMonth) {
     const that = this;
-    delayQuerySelector(this, '.cal-month__wrp', 100).then(rect => {
-      const monthItemHeight = rect && rect[0] && rect[0].height || 0
-      const _scrollTo: any = (selectMonth.month() - dayjs().month()) * monthItemHeight - 28
-      Taro.pageScrollTo({
-        // selector: '.taro-dates__wrap',
-        scrollTop: _scrollTo,
-        duration: 300,
-        success(data) {
-          console.log('scrollPageTo result: ', data)
-        },
-        fail() {
+    // delayQuerySelector(this, '.cal-month__wrp', 100).then(rect => {
+    //   const monthItemHeight = rect && rect[0] && rect[0].height || 0
+    //   const _scrollTo: any = (selectMonth.month() - dayjs().month()) * monthItemHeight - 28
+      
 
-        },
-        complete() {
+    //   Taro.pageScrollTo({
+    //     selector: '.taro-dates__wrap',
+    //     scrollTop: _scrollTo,
+    //     duration: 300,
+    //     success(data) {
+    //       console.log('scrollPageTo result: ', data)
+    //     },
+    //     fail() {
 
-        }
-      })
+    //     },
+    //     complete() {
+
+    //     }
+    //   })
+    // })
+    const _selectMonth = dayjs(selectMonth).format('YYYY-MM')
+    that.setState({
+      intoView: `into${_selectMonth}`
     })
 
 
@@ -641,8 +648,14 @@ export default class TaroDates extends Component<TaroDateProps, TaroDateState> {
   }
 
   componentDidShow() {
-    const { startDate } = this.props;
-    this.scrollToSelectMonth(startDate)
+    // const { startDate } = this.props;
+    // this.scrollToSelectMonth(startDate)
+  }
+
+  resetIntoView() {
+    this.setState({
+      intoView: ''
+    })
   }
 
   onDayClick(day, e) {
@@ -662,6 +675,9 @@ export default class TaroDates extends Component<TaroDateProps, TaroDateState> {
     if (e) e.preventDefault();
     if (this.isBlocked(day)) return;
     let { startDate, endDate } = this.props;
+    
+    this.resetIntoView();
+
     if (startDateOffset || endDateOffset) {
       startDate = getSelectedDateOffset(startDateOffset, day);
       endDate = getSelectedDateOffset(endDateOffset, day);
@@ -959,6 +975,7 @@ export default class TaroDates extends Component<TaroDateProps, TaroDateState> {
       months,
       visibleDays,
       currentMonth,
+      intoView,
       // phrases
     } = this.state;
     // const _endDate = endDate && endDate.format('YYYY-MM-DD')
@@ -985,6 +1002,7 @@ export default class TaroDates extends Component<TaroDateProps, TaroDateState> {
             })
           }
         </View>
+        <ScrollView className="cal-month__scroll" scrollIntoView={intoView} scrollY>
         <View className={classnames(
           'cal-week-monthes', {
             'cal-month__round': !isSingle
@@ -994,7 +1012,7 @@ export default class TaroDates extends Component<TaroDateProps, TaroDateState> {
             months.map((month) => {
               const monthString = toISOMonthString(month, 'YYYY-MM-DD');
               return (
-                <View className='cal-month__wrp' key={monthString || ''}>
+                <View id={'into' + monthString || ''} className='cal-month__wrp' key={monthString || ''}>
                   <View className='cal-month-title'>{month.format('YYYY年MM月')}</View>
                   <Month
                     month={month}
@@ -1003,8 +1021,8 @@ export default class TaroDates extends Component<TaroDateProps, TaroDateState> {
                     phrases={phrases}
                     modifiers={visibleDays[monthString || '']}
                     // isOutsideDay={isOutsideDay}
-                    onDayMouseEnter={this.onDayMouseEnter.bind(this, day)}
-                    onDayMouseLeave={this.onDayMouseLeave.bind(this, day)}
+                    onDayMouseEnter={this.onDayMouseEnter.bind(this)}
+                    onDayMouseLeave={this.onDayMouseLeave.bind(this)}
                     onDayClick={this.onDayClick}
                     initialVisibleMonth={() => currentMonth}
                   ></Month>
@@ -1013,6 +1031,7 @@ export default class TaroDates extends Component<TaroDateProps, TaroDateState> {
             })
           }
         </View>
+        </ScrollView>
         {
           cycleNotices.length > 0 ? (<View className='cal-cycle-notice'>每周{cycleNotices.join('、')}发船</View>) : null
         }
