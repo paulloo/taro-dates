@@ -216,7 +216,7 @@ export default class Index extends Component<IndexProps, IndexState> {
     return isAfterDay(day, dayjs().add(saleDays - reserveDays, 'day')) && isBeforeDay(day, dayjs().add(saleDays + 1, 'day'))
   }
 
-
+  // ?start=2020-03-30&end=&from=烟台&to=大连&round=1&cycle=0&saleDays=32&reserveDays=12&picktype=start
   render () {
     const {
       isSingle,
