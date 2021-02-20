@@ -122,8 +122,7 @@ export default class Index extends Component<IndexProps, IndexState> {
   onDayClose(day) {
       const { lineInfo, selectedDate } = this.props;
       const { isSingle, datePickType } = this.state;
-  
-      if(selectedDate && isSingle && datePickType === 'end') {
+      if(selectedDate && datePickType === 'end') {
           if(isBeforeDay(day.startDate, selectedDate.startDate)) {
               return;
           }

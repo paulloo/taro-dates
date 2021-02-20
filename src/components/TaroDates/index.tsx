@@ -707,19 +707,18 @@ export default class TaroDates extends AtComponent<TaroDateProps, TaroDateState>
 
       onDatesChange({ startDate, endDate });
 
-
-      if (isSingle) {
+      // if (isSingle) {
         onFocusChange(null);
         onClose({ startDate, endDate });
         return;
-      }
+      // }
 
-      if (isEndDateDisabled && !isStartDateAfterEndDate) {
-        onFocusChange(null);
-        onClose({ startDate, endDate });
-      } else if (!isEndDateDisabled) {
-        onFocusChange(END_DATE);
-      }
+      // if (isEndDateDisabled && !isStartDateAfterEndDate) {
+      //   onFocusChange(null);
+      //   onClose({ startDate, endDate });
+      // } else if (!isEndDateDisabled) {
+      //   onFocusChange(END_DATE);
+      // }
     } else if (focusedInput === END_DATE) {
       const firstAllowedEndDate = startDate && startDate.clone().add(minimumNights, 'day');
       if (!startDate) {
@@ -988,7 +987,7 @@ export default class TaroDates extends AtComponent<TaroDateProps, TaroDateState>
         { "taro-dates__cycle": cycleNotices.length > 0 }
       )} style={{top: fromTop}}
       >
-        <View className='cal-week-header' style={{top: fromTop}}>
+        <View className='cal-week-header'>
           {
             WEEKDAYS.map(i => {
               return (
