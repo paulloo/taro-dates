@@ -55,11 +55,11 @@ export default class Index extends Component<IndexProps, IndexState> {
       hoverDate: null,
       visibleDays: null,
       focusedInput: START_DATE,
-      startDate: dayjs(params.start),
+      startDate: params.start? dayjs(params.start): dayjs(),
       endDate: null,
       cycle: params.cycle || '0',
-      saleDays: Number(params.saleDays),
-      reserveDays: Number(params.reserveDays),
+      saleDays: params.saleDays? Number(params.saleDays): 0,
+      reserveDays: params.reserveDays? Number(params.reserveDays): 0,
       stateDateWrapper: date => date,
       isDateRangePickerInputFocused: false,
       isDayPickerFocused: false,
@@ -187,10 +187,10 @@ export default class Index extends Component<IndexProps, IndexState> {
    * @param day 
    */
   dayHighLightedHandler(day) {
-      if(!day) return false;
-      if(day.format("YYYY-MM-DD") === '2019-09-02') {
-          return true;
-      }
+      // if(!day) return false;
+      // if(day.format("YYYY-MM-DD") === '2019-09-02') {
+      //     return true;
+      // }
       return false
 
   }

@@ -22,25 +22,16 @@ interface MonthProps {
 }
 
 interface MonthState {
-    weeks: any;
 }
 
 export default class Month extends AtComponent<MonthProps, MonthState> {
     constructor(props: MonthProps) {
         super(props);
-        this.state = {
-            weeks: props.month && getCalendarMonthWeeks(
-                props.month,
-                false,
-                props.firstDayOfWeek == null ? dayjs().startOf('week').day() : props.firstDayOfWeek,
-            )
-        };
+
     }
 
     public render(): JSX.Element {
-        const {
-            weeks
-        } = this.state;
+      
         const {
             onDayMouseEnter,
             onDayMouseLeave,
@@ -48,11 +39,21 @@ export default class Month extends AtComponent<MonthProps, MonthState> {
             modifiers,
             phrases,
             month,
-            isSingle
+            isSingle,
+            firstDayOfWeek
         } = this.props;
         const dayString = day => {
             return toISODateString(day, '') || ''
         };
+        let weeks = []
+        if(month) {
+            weeks = getCalendarMonthWeeks(
+                month,
+                false,
+                firstDayOfWeek == null ? dayjs().startOf('week').day() : firstDayOfWeek,
+            )
+        }
+
         return (
             <View className={classnames(
                 'cal-month'

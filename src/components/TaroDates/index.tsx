@@ -435,26 +435,27 @@ export default class TaroDates extends AtComponent<TaroDateProps, TaroDateState>
 
   scrollToSelectMonth(selectMonth) {
     const that = this;
-    // delayQuerySelector(this, '.cal-month__wrp', 100).then(rect => {
-    //   const monthItemHeight = rect && rect[0] && rect[0].height || 0
-    //   const _scrollTo: any = (selectMonth.month() - dayjs().month()) * monthItemHeight - 28
+    delayQuerySelector(this, '.cal-month__wrp', 100).then(rect => {
+      const monthItemHeight = rect && rect[0] && rect[0].height || 0
+      const _scrollTo: any = (selectMonth.month() - dayjs().month()) * monthItemHeight - 28
       
 
-    //   Taro.pageScrollTo({
-    //     selector: '.taro-dates__wrap',
-    //     scrollTop: _scrollTo,
-    //     duration: 300,
-    //     success(data) {
-    //       console.log('scrollPageTo result: ', data)
-    //     },
-    //     fail() {
+      Taro.pageScrollTo({
+        selector: '.taro-dates__wrap',
+        scrollTop: _scrollTo,
+        duration: 300,
+        success(data) {
+          console.log('scrollPageTo result: ', data)
+        },
+        fail() {
 
-    //     },
-    //     complete() {
+        },
+        complete() {
 
-    //     }
-    //   })
-    // })
+        }
+      })
+    })
+    
     const _selectMonth = dayjs(selectMonth).format('YYYY-MM')
     that.setState({
       intoView: `into${_selectMonth}`
@@ -1008,7 +1009,7 @@ export default class TaroDates extends AtComponent<TaroDateProps, TaroDateState>
           })}
         >
           {
-            months.map((month) => {
+            months && months.length > 0 && months.map((month) => {
               const monthString = toISOMonthString(month, 'YYYY-MM-DD');
               return (
                 <View id={'into' + monthString || ''} className='cal-month__wrp' key={monthString || ''}>
@@ -1076,11 +1077,11 @@ TaroDates.propTypes = {
     /**
      * 出发日期
      */
-    startDate: Dayjs,
+    startDate: PropTypes.object,
     /**
      * 到达日期
      */
-    endDate: null,
+    endDate: PropTypes.object,
     block: PropTypes.bool,
     cycle: PropTypes.string,
     firstDayOfWeek: PropTypes.number,
