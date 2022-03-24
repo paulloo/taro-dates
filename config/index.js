@@ -1,5 +1,7 @@
+const plugins = require('./plugins')
 const isBuildComponent = process.env.TARO_BUILD_TYPE === 'component'
 const config = {
+  framework: "react",
   projectName: 'taro-dates',
   date: '2020-12-31',
   designWidth: 750,
@@ -10,29 +12,7 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  babel: {
-    sourceMap: true,
-    presets: [
-      ['env', {
-        modules: false
-      }]
-    ],
-    plugins: [
-      'transform-decorators-legacy',
-      'transform-class-properties',
-      'transform-object-rest-spread',
-      ['transform-runtime', {
-        'helpers': false,
-        'polyfill': false,
-        'regenerator': true,
-        'moduleName': 'babel-runtime'
-      }]
-    ]
-  },
-  plugins: [
-    '@tarojs/plugin-sass',
-    '@tarojs/plugin-terser'
-  ],
+  plugins,
   defineConstants: {
   },
   mini: {
@@ -63,11 +43,6 @@ const config = {
       autoprefixer: {
         enable: true,
         config: {
-          browsers: [
-            'last 3 versions',
-            'Android >= 4.1',
-            'ios >= 8'
-          ]
         }
       },
       cssModules: {
